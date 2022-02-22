@@ -33,17 +33,17 @@ module.exports = {
     "!./node_modules/@plydot/ui-core/tailwind-workspace-preset.js",
   ],
   darkMode: 'media', // or 'media' or 'class'
-  theme: {
-    extend: {
-      fontFamily: {
-        headline: sans,
-        body: serif,
-        sans,
-        serif,
-        mono: [...defaultTheme.fontFamily.mono],
-      },
-    },
-  },
+  // theme: {
+  //   extend: {
+  //     fontFamily: {
+  //       headline: sans,
+  //       body: serif,
+  //       sans,
+  //       serif,
+  //       mono: [...defaultTheme.fontFamily.mono],
+  //     },
+  //   },
+  // },
   theme: {
     extend: {},
   },
