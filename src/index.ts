@@ -1,1 +1,1 @@
-export * from "@plydot/ui-components"
+export * from "@plydot/ui-core"

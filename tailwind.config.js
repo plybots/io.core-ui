@@ -25,12 +25,12 @@ const serif = [
 
 module.exports = {
   presets: [
-    require('./node_modules/@plydot/ui-components/tailwind-workspace-preset.js')
+    require('@plydot/ui-core/tailwind-workspace-preset.js')
   ],
   content: [
-    "./src/**/*.{js,jsx}",
-    "./node_modules/@plydot/ui-components/*.{js,jsx}",
-    "!./node_modules/@plydot/ui-components/tailwind-workspace-preset.js",
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/@plydot/ui-core/*.{js,jsx,ts,tsx}",
+    "!./node_modules/@plydot/ui-core/tailwind-workspace-preset.js",
   ],
   darkMode: 'media', // or 'media' or 'class'
   theme: {
