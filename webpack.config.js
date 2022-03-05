@@ -1,10 +1,6 @@
 const path = require("path");
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
-
 const deps = require("./package.json").dependencies;
-
-const createConfigTargets = (target = "umd") => {
+const createConfigTargets = ({ clean = false, target = "umd" }) => {
   const libraryTarget = target == "esm" ? "commonjs-module" : target;
   const fileExt = target == "umd" ? "" : `.${target}`;
 
@@ -14,15 +10,12 @@ const createConfigTargets = (target = "umd") => {
       path: path.resolve(__dirname, "dist"),
       filename: `index${fileExt}.js`,
       libraryTarget,
-      // library: 'core_ui',
-      // library: {
-      //   type: "commonjs-module",
-      // },
+      clean,
     },
     externals: [...Object.keys(deps)],
+    
     resolve: {
       extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
-      plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.json" })],
     },
     module: {
       rules: [
@@ -38,21 +31,24 @@ const createConfigTargets = (target = "umd") => {
           use: ["style-loader", "css-loader", "postcss-loader"],
         },
         {
-          test: /\.(ts|tsx|js|jsx)$/,
+          test: /\.(ts|tsx|js|jsx|.json)$/,
           exclude: /node_modules/,
           use: {
             loader: "ts-loader",
             options: {
               experimentalFileCaching: true,
-            }
+              // // using lib because we do not want webpack to compile declarations we will use tsc
+              configFile: "tsconfig.lib.json"
+            },
           },
         },
       ],
     },
-    plugins: [
-      // new DeclarationBundlerPlugin({moduleName:'CoreUI'})
-    ]
+    plugins: [],
   };
 };
 
-module.exports = [createConfigTargets(), createConfigTargets("esm")];
+module.exports = [
+  createConfigTargets({ clean: true }),
+  createConfigTargets({ target: "esm" }),
+];

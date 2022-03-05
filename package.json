@@ -12,6 +12,8 @@
   "bugs": {
     "url": "https://code.plydot.com/plydot-institute/core-ui/-/issues"
   },
+  "sideEffects": false,
+  "source": "src/index.ts",
   "files": [
     "src/tailwind.css",
     "src/styles",
@@ -20,12 +22,12 @@
     "package.json",
     "README.*",
     "CHANGELOG.*",
-    "tailwind-workspace-preset.js"
+    "tailwind-config.js"
   ],
   "license": "MIT",
   "scripts": {
     "tailwind": "npx postcss ./src/tailwind.css  -o ./dist/core-ui.min.css",
-    "build": "webpack --mode production && yarn tailwind",
+    "build": "webpack --mode production && tsc --emitDeclarationOnly && yarn tailwind",
     "build:dev": "webpack --mode development --watch",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -45,11 +47,9 @@
     "@types/react": "^17.0.39",
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.3",
-    "declaration-bundler-webpack-plugin": "^1.0.3",
     "postcss": "^8.4.6",
     "postcss-import": "^14.0.2",
     "tailwindcss": "^3.0.22",
-    "tsconfig-paths-webpack-plugin": "^3.5.2",
     "typescript": "^4.4.4",
     "webpack": "^5.69.0"
   },
